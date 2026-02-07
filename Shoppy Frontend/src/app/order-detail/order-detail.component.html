@@ -1,0 +1,20 @@
+<h2>Order Details</h2>
+<div>
+  <p><strong>Order ID:</strong> {{ data.orderId }}</p>
+  <p><strong>Date Placed:</strong> {{ data.datePlaced | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+  <p><strong>Status:</strong> {{ data.orderStatus }}</p>
+  <p><strong>User:</strong> {{ data.user.username }}</p>
+</div>
+<h3>Items</h3>
+<ul>
+  <li *ngFor="let item of data.orderItems">
+    <strong>{{ item.product.name }}</strong> x
+    {{ item.quantity }}
+    for a total of ${{ item.purchasedPrice }}
+    (retail price each ${{ item.product.retailPrice }})
+    <button mat-button (click)="viewProductDetails(item.product.productId)">
+      View Product Details
+    </button>
+  </li>
+</ul>
+<button mat-button (click)="closeDialog()">Close</button>

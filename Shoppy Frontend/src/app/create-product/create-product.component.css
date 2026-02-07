@@ -1,0 +1,14 @@
+.container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-title {
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,15 @@
+<div>
+  <h3>Top 3 Most Popular Products</h3>
+  <div *ngIf="popularProducts.length > 0; else noData">
+    <ul>
+      <li *ngFor="let product of popularProducts">
+        <strong>{{ product.name }}</strong>: {{ product.description }}
+        <br />
+        <span>Quantity Sold: {{ product.quantity }}</span>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noData>
+    <p>No data available.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,110 @@
+<div>
+  <h2>Available Products</h2>
+  <button *ngIf="role === 'ROLE_ADMIN'" mat-raised-button color="primary" (click)="navigateToCreateProduct()">
+    Create Product
+  </button>
+  <mat-table [dataSource]="products" class="mat-elevation-z8">
+    <!-- Product ID Column -->
+    <ng-container matColumnDef="productId">
+      <mat-header-cell *matHeaderCellDef> Product ID </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.productId }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.description }} </mat-cell>
+    </ng-container>
+
+    <!-- Retail Price Column -->
+    <ng-container matColumnDef="retailPrice">
+      <mat-header-cell *matHeaderCellDef> Retail Price </mat-header-cell>
+      <mat-cell *matCellDef="let product"> ${{ product.retailPrice }} </mat-cell>
+    </ng-container>
+
+    <!-- Wholesale Price Column -->
+    <ng-container *ngIf="role === 'ROLE_ADMIN'" matColumnDef="wholesalePrice">
+      <mat-header-cell *matHeaderCellDef> Wholesale Price </mat-header-cell>
+      <mat-cell *matCellDef="let product"> ${{ product.wholesalePrice }} </mat-cell>
+    </ng-container>
+<!--    <ng-container matColumnDef="wholesalePrice">-->
+<!--      <mat-header-cell *matHeaderCellDef> Wholesale Price </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let product"> ${{ product.wholesalePrice }} </mat-cell>-->
+<!--    </ng-container>-->
+
+    <!-- Quantity Column (Visible Only for Admins) -->
+    <ng-container *ngIf="role === 'ROLE_ADMIN'" matColumnDef="stockQuantity">
+      <mat-header-cell *matHeaderCellDef> Stock Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{ product.quantity }} </mat-cell>
+    </ng-container>
+
+    <!-- Quantity Input Column -->
+<!--    <ng-container matColumnDef="quantity">-->
+<!--      <mat-header-cell *matHeaderCellDef> Quantity Desired </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let product">-->
+<!--        <input type="number" [(ngModel)]="product.quantity" min="0" style="width: 50px;" />-->
+<!--      </mat-cell>-->
+<!--    </ng-container>-->
+    <!-- Quantity Input Column -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity Desired </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <input
+          type="number"
+          [(ngModel)]="desiredQuantities[product.productId]"
+          min="1"
+          placeholder=""
+          style="width: 50px;"
+        />
+      </mat-cell>
+    </ng-container>
+
+    <!-- Add to Watchlist Button Column -->
+    <ng-container matColumnDef="addToWatchlist">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="addToWatchlist(product.productId)">
+          Add to Watchlist
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Add to Cart Button Column -->
+    <ng-container matColumnDef="addToCart">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="addToCart(product)">
+          Add To Cart
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Edit Button Column (Visible Only for Admins) -->
+    <ng-container *ngIf="role === 'ROLE_ADMIN'" matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="editProduct(product.productId)">Edit</button>
+      </mat-cell>
+    </ng-container>
+
+<!--    <mat-header-row *matHeaderRowDef="['productId', 'name', 'description', 'retailPrice', 'wholesalePrice', 'quantity', 'addToWatchlist', 'addToCart']"></mat-header-row>-->
+<!--    <mat-row *matRowDef="let row; columns: ['productId', 'name', 'description', 'retailPrice', 'wholesalePrice', 'quantity', 'addToWatchlist', 'addToCart']"></mat-row>-->
+    <mat-header-row *matHeaderRowDef="role === 'ROLE_ADMIN'
+      ? ['productId', 'name', 'description', 'retailPrice', 'wholesalePrice', 'stockQuantity', 'quantity', 'addToWatchlist', 'addToCart', 'edit']
+      : ['productId', 'name', 'description', 'retailPrice', 'quantity', 'addToWatchlist', 'addToCart']">
+    </mat-header-row>
+    <mat-row *matRowDef="let row; columns: role === 'ROLE_ADMIN'
+      ? ['productId', 'name', 'description', 'retailPrice', 'wholesalePrice', 'stockQuantity', 'quantity', 'addToWatchlist', 'addToCart', 'edit']
+      : ['productId', 'name', 'description', 'retailPrice', 'quantity', 'addToWatchlist', 'addToCart']">
+    </mat-row>
+  </mat-table>
+
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+</div>

@@ -1,0 +1,8 @@
+<div style="text-align: center; margin-top: 50px;">
+  <h1>Super Duper Mart Support</h1>
+  <h2>Send us a message if you have any questions or concerns</h2>
+  <textarea [(ngModel)]="message" rows="5" cols="50" placeholder="Write your message here..."></textarea>
+  <br /><br />
+  <button (click)="submitMessage()" [disabled]="!message.trim()">Submit</button>
+  <p *ngIf="successMessage" style="color: green; margin-top: 20px;">{{ successMessage }}</p>
+</div>

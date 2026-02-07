@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Welcome to Super Duper Mart, {{ username }}!</h1>
+
+  <h2>Your Orders</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderId }}</td>
+      <td>{{ order.orderStatus }}</td>
+      <td>{{ order.datePlaced | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+      <td>
+<!--        <button (click)="viewOrder(order.orderId)">View</button>-->
+<!--        <button (click)="cancelOrder(order.orderId)">Cancel</button>-->
+        <button mat-button color="primary" (click)="viewOrder(order.orderId)">View</button>
+        <button mat-button color="warn" (click)="cancelOrder(order.orderId)">Cancel</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+<!--  <h2>Top 3 Frequently Purchased Items</h2>-->
+<!--  <ul>-->
+<!--    <li *ngFor="let item of frequentItems">-->
+<!--      {{ item.name }}-->
+<!--&lt;!&ndash;      - {{ item.quantity }} purchased&ndash;&gt;-->
+<!--    </li>-->
+<!--  </ul>-->
+
+  <h2>Top 3 Frequently Purchased Items</h2>
+  <ul>
+    <li *ngFor="let item of frequentItems">
+      {{ item.name }} - {{ item.quantity }} purchased
+    </li>
+  </ul>
+
+  <h2>Top 3 Recently Purchased Items</h2>
+  <ul>
+    <li *ngFor="let item of recentItems">
+      {{ item.name }}
+<!--      - Purchased on {{ item.datePurchased }}-->
+    </li>
+  </ul>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>

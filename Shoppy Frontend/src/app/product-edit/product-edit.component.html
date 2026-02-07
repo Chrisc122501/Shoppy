@@ -1,0 +1,29 @@
+<div class="container mat-elevation-z8">
+  <h2 class="mat-title">Edit Product</h2>
+  <form (ngSubmit)="updateProduct()" #editForm="ngForm" style="max-width: 600px; margin: auto;">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" id="description" [(ngModel)]="product.description" name="description" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Wholesale Price</mat-label>
+      <input matInput type="number" id="wholesalePrice" [(ngModel)]="product.wholesalePrice" name="wholesalePrice" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Retail Price</mat-label>
+      <input matInput type="number" id="retailPrice" [(ngModel)]="product.retailPrice" name="retailPrice" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" id="quantity" [(ngModel)]="product.quantity" name="quantity" required />
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+      <button type="submit" mat-raised-button color="primary">Update</button>
+      <button type="button" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

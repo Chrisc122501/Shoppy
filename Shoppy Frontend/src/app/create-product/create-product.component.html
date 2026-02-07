@@ -1,0 +1,37 @@
+<div class="container mat-elevation-z8">
+  <h2 class="mat-title">Create New Product</h2>
+  <form (ngSubmit)="submitProduct()" style="max-width: 600px; margin: auto;">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" [(ngModel)]="newProduct.name" name="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput id="description" [(ngModel)]="newProduct.description" name="description" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Wholesale Price</mat-label>
+      <input matInput id="wholesalePrice" type="number" [(ngModel)]="newProduct.wholesalePrice" name="wholesalePrice" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Retail Price</mat-label>
+      <input matInput id="retailPrice" type="number" [(ngModel)]="newProduct.retailPrice" name="retailPrice" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Quantity</mat-label>
+      <input matInput id="quantity" type="number" [(ngModel)]="newProduct.quantity" name="quantity" required />
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+      <button mat-raised-button color="primary" type="submit">Create Product</button>
+      <button mat-raised-button color="warn" type="button" (click)="router.navigate(['/products'])">Cancel</button>
+    </div>
+  </form>
+
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+</div>

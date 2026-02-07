@@ -1,0 +1,74 @@
+<!--<div *ngIf="initialized">-->
+<!--  <nav *ngIf="isLoggedIn" style="background-color: #333; color: white; padding: 10px;">-->
+<!--    <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: space-between; align-items: center;">-->
+<!--      &lt;!&ndash; Left side: navigation links &ndash;&gt;-->
+<!--      <div style="display: flex;">-->
+<!--        <li style="margin-right: 20px;">-->
+<!--          <a routerLink="/home" routerLinkActive="active" style="color: white; text-decoration: none;">Home</a>-->
+<!--        </li>-->
+<!--        <li style="margin-right: 20px;">-->
+<!--          <a routerLink="/products" routerLinkActive="active" style="color: white; text-decoration: none;">Products</a>-->
+<!--        </li>-->
+<!--        <li style="margin-right: 20px;">-->
+<!--          <a routerLink="/watchlist" routerLinkActive="active" style="color: white; text-decoration: none;">Watchlist</a>-->
+<!--        </li>-->
+<!--        <li style="margin-right: 20px;">-->
+<!--          <a routerLink="/cart" routerLinkActive="active" style="color: white; text-decoration: none;">Cart</a>-->
+<!--        </li>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Right side: Contact Us and Logout &ndash;&gt;-->
+<!--      <div style="display: flex;">-->
+<!--        <li style="margin-right: 20px;">-->
+<!--          <a routerLink="/contact-us" routerLinkActive="active" style="color: white; text-decoration: none;">Contact Us</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <button (click)="logout()" style="background-color: transparent; border: none; color: white; cursor: pointer;">-->
+<!--            Logout-->
+<!--          </button>-->
+<!--        </li>-->
+<!--      </div>-->
+<!--    </ul>-->
+<!--  </nav>-->
+<!--</div>-->
+<!--<div style="padding: 20px;">-->
+<!--  <router-outlet></router-outlet>-->
+<!--</div>-->
+
+<div *ngIf="initialized">
+  <nav *ngIf="isLoggedIn" style="background-color: #333; color: white; padding: 10px;">
+    <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex;">
+        <li *ngIf="isAdmin" style="margin-right: 20px;">
+          <a routerLink="/admin-dashboard" routerLinkActive="active" style="color: white; text-decoration: none;">Home</a>
+        </li>
+        <li *ngIf="!isAdmin" style="margin-right: 20px;">
+          <a routerLink="/home" routerLinkActive="active" style="color: white; text-decoration: none;">Home</a>
+        </li>
+        <li style="margin-right: 20px;">
+          <a routerLink="/products" routerLinkActive="active" style="color: white; text-decoration: none;">Products</a>
+        </li>
+        <li style="margin-right: 20px;">
+          <a routerLink="/watchlist" routerLinkActive="active" style="color: white; text-decoration: none;">Watchlist</a>
+        </li>
+        <li style="margin-right: 20px;">
+          <a routerLink="/cart" routerLinkActive="active" style="color: white; text-decoration: none;">Cart</a>
+        </li>
+      </div>
+
+      <div style="display: flex;">
+        <li style="margin-right: 20px;">
+          <a routerLink="/contact-us" routerLinkActive="active" style="color: white; text-decoration: none;">Contact Us</a>
+        </li>
+        <li>
+          <button (click)="logout()" style="background-color: transparent; border: none; color: white; cursor: pointer; font-size: inherit;">
+            Logout
+          </button>
+        </li>
+      </div>
+    </ul>
+  </nav>
+</div>
+<div style="padding: 20px;">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,16 @@
+<div>
+  <h3>Top 3 Most Profitable Products</h3>
+  <div *ngIf="topProfitableProducts.length > 0; else noData">
+    <ul>
+      <li *ngFor="let product of topProfitableProducts">
+        <strong>{{ product.name }}</strong>: {{ product.description }}
+        <br />
+<!--        <span>Revenue: ${{ product.revenue }}</span>-->
+        <span>Total Profit: ${{ product.profit.toFixed(2) }}</span>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noData>
+    <p>No data available.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,46 @@
+<div>
+  <h2>Your Cart</h2>
+  <mat-table [dataSource]="cart" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.quantity }} </mat-cell>
+    </ng-container>
+
+    <!-- Retail Price Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let item"> ${{ item.retailPrice }} </mat-cell>
+    </ng-container>
+
+    <!-- Remove From Cart Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <button mat-button color="warn" (click)="removeFromCart(item.productId)">
+          Remove From Cart
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'quantity', 'price', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'quantity', 'price', 'action']"></mat-row>
+  </mat-table>
+
+  <div style="margin-top: 20px;">
+    <h3>Total Price: ${{ formattedTotalPrice() }}</h3>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="placeOrder()" style="margin-top: 20px;">
+    Purchase This Order
+  </button>
+
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+</div>

@@ -1,0 +1,38 @@
+<div>
+  <h2>Your Watchlist</h2>
+  <mat-table [dataSource]="watchlist" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.product.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{ item.product.description }} </mat-cell>
+    </ng-container>
+
+    <!-- Retail Price Column -->
+    <ng-container matColumnDef="retailPrice">
+      <mat-header-cell *matHeaderCellDef> Retail Price </mat-header-cell>
+      <mat-cell *matCellDef="let item"> ${{ item.product.retailPrice }} </mat-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <button mat-button color="warn" (click)="removeFromWatchlist(item.product.productId)">
+          Remove From Watchlist
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'description', 'retailPrice', 'action']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'description', 'retailPrice', 'action']"></mat-row>
+  </mat-table>
+
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+</div>
